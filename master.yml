@@ -2,6 +2,7 @@
 
 
 
+#Inital setup: installs pip, then flask and various flask plugins
 - hosts: all
   connection: local
   become: yes
@@ -9,3 +10,13 @@
   gather_facts: true 
   roles:
   - InitialSetup
+
+# Setup and Start of mongoDB
+- hosts: all
+  connection: local
+  become: yes
+  become_method: sudo
+  gather_facts: true 
+  roles:
+  - MongoDBSetup
+  
