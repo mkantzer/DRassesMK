@@ -16,7 +16,6 @@ Vagrant.configure("2") do |config|
  	ansible.playbook = "master.yml"
   end
 
-
 end
 
 
