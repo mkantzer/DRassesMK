@@ -1,16 +1,6 @@
 --- # Master playbook for DataRobot Assessment 
 
 
-
-#Inital setup: installs pip, then flask and various flask plugins
-- hosts: all
-  connection: local
-  become: yes
-  become_method: sudo
-  gather_facts: true 
-  roles:
-  - InitialSetup
-
 # Setup and Start of mongoDB
 - hosts: all
   connection: local
@@ -19,4 +9,12 @@
   gather_facts: true 
   roles:
   - MongoDBSetup
-  
+
+# Python Setup: installs pip, then flask and various flask plugins, then starts the flask app
+- hosts: all
+  connection: local
+  become: yes
+  become_method: sudo
+  gather_facts: true 
+  roles:
+  - WebAppSetup
