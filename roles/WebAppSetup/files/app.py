@@ -7,9 +7,10 @@ api = Api(app)
 mongo = PyMongo(app)
 
 
+#class User(Resource):
+#	def post(self, payload):
 
-
-
+#	def get(self, uid, date):
 
 
 
@@ -17,11 +18,14 @@ mongo = PyMongo(app)
 # api.add_resource()
 
 
-@app.route("/")
+
+
+
+
+# for checking connection. remove in final submission
+@app.route("/checkConn")
 def hello():
 	return "Hello World!"
-
-
 
 
 if __name__ == '__main__':

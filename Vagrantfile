@@ -5,9 +5,9 @@ Vagrant.configure("2") do |config|
   # enable private network to VM
   config.vm.network "private_network", ip: "192.168.33.10"
   # Configure Port Forwarding to guest
- # config.vm.network "forwarded_port", guest: 80, host: 8080
+#  config.vm.network "forwarded_port", guest: 80, host: 8080
   # Connect VM to public network
-  config.vm.network "public_network" 
+#  config.vm.network "public_network" 
   # Install Ansible on Vagrant Guest
   config.vm.provision "shell", inline: "sudo apt-get install software-properties-common"
   # Use correct PPA 
