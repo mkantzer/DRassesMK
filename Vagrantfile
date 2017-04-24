@@ -2,7 +2,10 @@
 # vi: set ft=ruby :
 Vagrant.configure("2") do |config|
   config.vm.box = "ubuntu/trusty64"
-  
+  # enable private network to VM
+  config.vm.network "private_network", ip: "192.168.33.10"
+  # Connect VM to public network
+# config.vm.network "public_network" 
   # Install Ansible on Vagrant Guest
   config.vm.provision "shell", inline: "sudo apt-get install software-properties-common"
   # Use correct PPA 
