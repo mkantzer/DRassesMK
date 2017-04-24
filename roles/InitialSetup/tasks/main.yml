@@ -1,0 +1,15 @@
+--- # Main task list for Inital Setup
+
+- name: Install Python Pip
+  apt:
+    name: python-pip
+    state: latest
+
+#- name: Install Virtual Env
+#  apt:
+#    name: python-virtualenv
+#    state; latest
+
+# install flask with Pip
+- pip:
+    name: flask

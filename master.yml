@@ -1,0 +1,11 @@
+--- # Master playbook for DataRobot Assessment 
+
+
+
+- hosts: all
+  connection: local
+  become: yes
+  become_method: sudo
+  gather_facts: true 
+  roles:
+  - InitialSetup
