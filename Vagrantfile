@@ -11,10 +11,6 @@ Vagrant.configure("2") do |config|
   config.vm.provision "shell", inline: "sudo apt-get install ansible -y"
   config.vm.provision "shell", inline: "ansible --version"
 
-  # Add localhost to ansible hosts
-  
-
-
   #execute anible playbook for Flask and mongoDB setup
   config.vm.provision "ansible_local" do |ansible|
  	ansible.playbook = "master.yml"
