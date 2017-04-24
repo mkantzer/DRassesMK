@@ -1,25 +1,24 @@
 --- #task list for setup and configuration of MongoDB
 
-
-# Add MondoDB Public Key
-- apt_key:
+- name: Add MongoDB Public Key
+  apt_key:
     keyserver: hkp://keyserver.ubuntu.com
     id: 0C49F3730359A14518585931BC711F9BA15703C6
     state: present
 
-# Add MongoDB source list
-- lineinfile:
+- name: Add MongoDB source list
+  lineinfile:
     path: /etc/apt/sources.list.d/mongodb-org-3.4.list
     line: deb [ arch=amd64 ] http://repo.mongodb.org/apt/ubuntu trusty/mongodb-org/3.4 multiverse
     create: yes
     state: present
 
-# Install MongoDB
-- apt:
+- name: Install MongoDB
+  apt:
     name: mongodb-org
     update_cache: yes
 
-# Start mongoDB
-- service:
+- name: Start mongoDB
+  service:
     name: mongod
     state: started

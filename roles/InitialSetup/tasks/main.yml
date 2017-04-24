@@ -10,15 +10,14 @@
 #    name: python-virtualenv
 #    state; latest
 
-
-# install flask with Pip
-- pip:
+- name: install flask with Pip
+  pip:
     name: flask
 
-#install Flask-RESTful
-- pip:
+- name: install Flask-RESTful
+  pip:
     name: flask-restful
 
-#install Flask-PyMongo
-- pip:
+- name: install Flask-PyMongo
+  pip:
     name: Flask-PyMongo
