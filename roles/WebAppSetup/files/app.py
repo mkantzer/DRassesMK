@@ -4,18 +4,17 @@ from pymongo import MongoClient
 import hashlib, datetime, pprint
 from dateutil import parser as dateparse
 
+#start up flask app and restful api
 app = Flask(__name__)
 api = Api(app)
 
-#create client to running instance
+#create client to running instance, then set up database and log collection
 client = MongoClient('localhost', 27017)
-#set up database
 db = client.logging_database
-#set up log collection
 logs = db.logs
 
 
-#set up request parser
+#start up request parser
 parser = reqparse.RequestParser()
 
 

@@ -26,5 +26,5 @@
   pip:
     name: python-dateutil
 
-#- name: Start Flask App
-#  script: /vagrant/roles/WebAppSetup/files/app.py
+- name: Start Flask App
+  shell: python /vagrant/roles/WebAppSetup/files/app.py
