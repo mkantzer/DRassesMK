@@ -14,6 +14,20 @@ Usage (on host machine):
 * `vagrant up`
 * wait for buildout to finish
 
+If the server stops responding for some reason, this can be fixed by either:
+
+```
+vagrant ssh
+sudo service webapp restart
+```
+
+or
+
+```
+vangrant destroy -f
+vagrant up
+```
+
 ## Endpoints
 The VM and associated services should now be fully running. You can execute GET and POST requests against it at:
 
@@ -36,4 +50,7 @@ This expects a date and a uid parameter. For example:
 `curl 'http://192.168.33.10:8080/get?uid=1&date=2015-05-12T14:36:00.451765'`
 
 ## Known Issues, Changes I would make
-*
+* Error handling is very sparse. This would need to be greatly improved for a production system
+* There is not form of authentication on the requests
+* input type verification is not currently utilized
+* No current check for match between UID and Name before writing to database. 
