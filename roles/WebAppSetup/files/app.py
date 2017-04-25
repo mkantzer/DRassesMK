@@ -19,9 +19,6 @@ mongo = PyMongo(app)
 
 
 
-
-
-
 # for checking connection. remove in final submission
 @app.route("/checkConn")
 def hello():
