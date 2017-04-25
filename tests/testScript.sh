@@ -12,6 +12,15 @@ curl 192.168.33.10:8080/post -X POST -H "Content-Type: application/json" -d '{"d
 #curl 192.168.33.10:8080/post -X POST -H "Content-Type: application/json" -d ', "md5checksum": ""}'
 echo "the next should return with a checksum error"
 curl 192.168.33.10:8080/post -X POST -H "Content-Type: application/json" -d '{"date": "2015-05-13T14:36:00.451765", "uid": "2", "name": "Mike Kan", "md5checksum": "EFA6EFAACB0EA1B88537AC1A6C58647E"}'
-# execute gets
-echo "The next command should return ___"
+# execute GETs
+echo "The next command should return 3"
 curl 'http://192.168.33.10:8080/get?uid=1&date=2015-05-12T14:36:00.451765'
+
+echo "The next command should return 1"
+curl 'http://192.168.33.10:8080/get?uid=1&date=2015-05-13T14:36:00.451765'
+
+echo "The next command should return 2"
+curl 'http://192.168.33.10:8080/get?uid=2&date=2015-05-12T14:36:00.451765'
+
+echo "The next command should return 1"
+curl 'http://192.168.33.10:8080/get?uid=2&date=2015-05-13T14:36:00.451765'

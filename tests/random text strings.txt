@@ -32,6 +32,13 @@ TO CHECK GET:
 curl 'http://192.168.33.10:8080/get?uid=1&date=2015-05-12T14:36:00.451765'
 curl 'http://192.168.33.10:8080/get?uid=1&date=2015-05-12'
 
+
+checking get with json:
+curl '192.168.33.10:8080/get?{"uid": "1", "date": "2015-05-12T14:36:00.451765"}'
+
+
+
+
 To Check DB:
 curl 'http://192.168.33.10:8080/check'
 
