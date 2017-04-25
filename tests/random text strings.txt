@@ -30,7 +30,7 @@ curl 192.168.33.10:8080/post -X POST -H "Content-Type: application/json" -d '{"u
 TO CHECK GET:
 
 curl 'http://192.168.33.10:8080/get?uid=1&date=2015-05-12T14:36:00.451765'
-
+curl 'http://192.168.33.10:8080/get?uid=1&date=2015-05-12'
 
 To Check DB:
 curl 'http://192.168.33.10:8080/check'
