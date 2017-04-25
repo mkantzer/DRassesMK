@@ -14,6 +14,8 @@ Usage (on host machine):
 * `vagrant up`
 * wait for buildout to finish
 
+there is no need to log in and manually start the Flask application; it is hosted within a gunicorn instance that is set to automatically start
+
 If the server stops responding for some reason, this can be fixed by either:
 
 ```
