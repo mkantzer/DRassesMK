@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify
 from flask_restful import Resource, Api, reqparse
 from pymongo import MongoClient
 import hashlib, datetime, pprint
+from dateutil import parser
 
 app = Flask(__name__)
 api = Api(app)
@@ -15,7 +16,6 @@ logs = db.logs
 
 
 
-
 class Posting(Resource):
 	def post(self):
 		payload = request.get_json(force=True)
@@ -25,20 +25,23 @@ class Posting(Resource):
 		m.update(StringtoChecksum)
 		# Verify checksums equal
 		if payload['md5checksum'].lower() == m.hexdigest().lower():
-
-			post = {"uid": "%s"%payload['uid']
-					"name": "%s"%payload['uid']
-					"date": "%s"%payload['uid']
-					"md5checksum": "%s"%payload['uid']
-					}
-
-			
-
-			return "added to database"
-		
-
+			#convert given date format to datetime.datetime
+			newdate = parser.parse(payload['date'])
+			#create dictonary/doc
+			data = {"uid": payload['uid'],
+					"name": payload['name'],
+					"date": newdate,
+					"md5checksum": payload['md5checksum']}
+#			pprint.pprint(data)		
+			post_id = logs.insert_one(data).inserted_id
+			return "Successfully inserted with post_id %s"%post_id
 		else:
-			return "nope"
+			#if checksums arent equal
+			return "Error 400, bad checksum"
+
+#class Getting(Resource):
+#	def get(self, ):
+
 
 #this may need to be under a different class/resource
 #	def get(self, uid, date):
@@ -46,6 +49,9 @@ class Posting(Resource):
 
 # First endpoint, for receiving POSTs
 api.add_resource(Posting, '/post')
+
+# Second endpoint, for GET requests
+#api.add_resource(Getting, '/get')
 
 
 
