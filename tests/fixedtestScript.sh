@@ -1,5 +1,6 @@
 #!/bin/bash
 # write a bunch of files to server
+echo "this script assumes that you have not run any other tests against this instance"
 echo "these should return Successfully inserted with post_id"
 curl 192.168.33.10:8080/post -X POST -H "Content-Type: application/json" -d '{"date": "2015-05-12T14:36:00.451765", "uid": "1", "name": "John Doe", "md5checksum": "E8C83E232B64CE94FDD0E4539AD0D44F"}'
 curl 192.168.33.10:8080/post -X POST -H "Content-Type: application/json" -d '{"date": "2015-05-12T14:40:00.451765", "uid": "1", "name": "John Doe", "md5checksum": "92D5B45A67FFAEB8358FF155DC6CDAF6"}'
@@ -16,7 +17,13 @@ curl 192.168.33.10:8080/post -X POST -H "Content-Type: application/json" -d '{"d
 echo "the next should return with a checksum error"
 curl 192.168.33.10:8080/post -X POST -H "Content-Type: application/json" -d '{"date": "2015-05-13T14:36:00.451765", "uid": "2", "name": "Mike Kan", "md5checksum": "EFA6EFAACB0EA1B88537AC1A6C58647E"}'
 # execute Gets
-echo "this should respond with ___"
+echo "this should respond with 3"
+curl '192.168.33.10:8080/get?uid=1&date=2015-05-12T14:36:00.451765'
+echo "this should respond with 1"
+curl '192.168.33.10:8080/get?uid=1&date=2015-05-13T14:36:00.451765'
+echo "this should respond with 2"
 curl '192.168.33.10:8080/get?uid=2&date=2015-05-13T14:36:00.451765'
-echo "this should respond with ___"
-curl '192.168.33.10:8080/get?uid=2&date=2015-05-13T14:36:00.451765'
+echo "this should respond with 0"
+curl '192.168.33.10:8080/get?uid=3&date=2015-05-13T14:36:00.451765'
+echo "this should respond with 0"
+curl '192.168.33.10:8080/get?uid=2&date=2018-05-13T14:36:00.451765'

@@ -51,7 +51,17 @@ This expects a date and a uid parameter. For example:
 
 `curl 'http://192.168.33.10:8080/get?uid=1&date=2015-05-12T14:36:00.451765'`
 
+
+## Testing
+ 
+under `/tests`, there is a file called fixedtestScript.sh which will run a small number of tests against the guest, including:
+* Several POST requests that should succeed
+* POST request with a mismatched UID and Name (but correct checksum)
+* POST request with incorrect checksum
+* Several GET requests, which will tell the expected and actual results
+* Please note that the script assumes that no other requests have been made to server, and that database is clean
+
 ## Known Issues, Changes I would make
 * Error handling is very sparse. This would need to be greatly improved for a production system
-* There is not form of authentication on the requests
+* There is not form of authentication/permission on the requests
 * input type verification is not currently utilized 
