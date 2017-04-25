@@ -19,8 +19,17 @@ class Posting(Resource):
 	def post(self):
 		payload = request.get_json(force=True)
 		# verify checksum
-		
-		return uid
+		m = hashlib.md5()
+		StringtoChecksum = '''{"date": "%(date)s", "uid": "%(uid)s", "name": "%(name)s"}''' %{'date': payload['date'], 'uid':payload['uid'], 'name': payload['name']}
+		m.update(StringtoChecksum)
+#		print(StringtoChecksum)
+#		print("""{"date": "2015-05-12T14:36:00.451765", "uid": "1", "name": "John Doe"}""")
+#		print(m.hexdigest().lower())
+#		print(payload['md5checksum'].lower())
+		if payload['md5checksum'].lower() == m.hexdigest().lower():
+			return "this is great"
+		else:
+			return "nope"
 
 
 
