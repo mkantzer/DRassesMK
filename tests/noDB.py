@@ -25,7 +25,7 @@ class Posting(Resource):
 #		print(StringtoChecksum)
 #		print("""{"date": "2015-05-12T14:36:00.451765", "uid": "1", "name": "John Doe"}""")
 #		print(m.hexdigest().lower())
-#		print(payload['md5checksum'].lower())
+		print(payload['md5checksum'].lower())
 		if payload['md5checksum'].lower() == m.hexdigest().lower():
 			return "this is great"
 		else:
