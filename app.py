@@ -52,8 +52,8 @@ class Posting(Resource):
 
 class Getting(Resource):
 	def get(self):
-		parser.add_argument('uid', required=True, help="uid required for this request")
-		parser.add_argument('date', required=True, help="date required for this request")
+		parser.add_argument('uid', required=True, help="meh")
+		parser.add_argument('date', required=True)
 		args = parser.parse_args()
 		uid = args['uid']
 		#convert datetime to start/end times
@@ -63,7 +63,11 @@ class Getting(Resource):
 
 		#run check on database for documents that have date within range:
 			#daystart <= date < nextdaystart
-		numberoflogs = logs.count({ "$and": [{"date": {"$gte": daystart}},{"date": {"$lt": nextdaystart}}]})		
+			#AND that have the requested uid
+		numberoflogs = logs.count({ "$and": [{"date": {"$gte": daystart}}, {"date": {"$lt": nextdaystart}}, {"uid": {"$eq": uid}}]})
+		
+
+
 		return numberoflogs
 
 
@@ -85,15 +89,6 @@ api.add_resource(Getting, '/get')
 
 # Third Endpoint, for verifying post writes correctly to database
 api.add_resource(Checking, '/check')
-
-
-
-
-# for checking connection. remove in final submission
-#@app.route("/checkConn")
-#def hello():
-#	return "Hello World! noDB.py \n"
-
 
 if __name__ == '__main__':
 	app.run(host='0.0.0.0', port=8080, debug=True)
