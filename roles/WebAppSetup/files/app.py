@@ -1,11 +1,20 @@
 from flask import Flask, request, jsonify
 from flask_restful import Resource, Api, reqparse
-from flask_pymongo import PyMongo
-import hashlib
+from pymongo import MongoClient
+import hashlib, datetime, pprint
 
 app = Flask(__name__)
 api = Api(app)
-mongo = PyMongo(app)
+
+#create client to running instance
+client = MongoClient('localhost', 27017)
+#set up database
+db = client.logging_database
+#set up log collection
+logs = db.logs
+
+
+
 
 class Posting(Resource):
 	def post(self):
@@ -16,7 +25,18 @@ class Posting(Resource):
 		m.update(StringtoChecksum)
 		# Verify checksums equal
 		if payload['md5checksum'].lower() == m.hexdigest().lower():
-			return "this is great"
+
+			post = {"uid": "%s"%payload['uid']
+					"name": "%s"%payload['uid']
+					"date": "%s"%payload['uid']
+					"md5checksum": "%s"%payload['uid']
+					}
+
+			
+
+			return "added to database"
+		
+
 		else:
 			return "nope"
 
