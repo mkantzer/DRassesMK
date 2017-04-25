@@ -52,5 +52,4 @@ This expects a date and a uid parameter. For example:
 ## Known Issues, Changes I would make
 * Error handling is very sparse. This would need to be greatly improved for a production system
 * There is not form of authentication on the requests
-* input type verification is not currently utilized
-* No current check for match between UID and Name before writing to database. 
+* input type verification is not currently utilized 

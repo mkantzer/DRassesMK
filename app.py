@@ -38,6 +38,10 @@ class Posting(Resource):
 		m.update(StringtoChecksum)
 		# Verify checksums equal
 		if payload['md5checksum'].lower() == m.hexdigest().lower():
+			#check that the given name is matched to the given UID
+			for log in logs.find({"uid":{"$eq": payload['uid']}}):
+				if log['name'] != payload['name']:
+					return "Error 400, Name did not match previously used Names for this UID"
 			#convert given date format to datetime.datetime
 			newdate = dateparse.parse(payload['date'])
 			#create dictonary/doc
@@ -66,7 +70,6 @@ class Getting(Resource):
 		d = dateparse.parse(args['date'])
 		daystart = datetime.datetime(d.year,d.month,d.day)
 		nextdaystart = daystart + datetime.timedelta(days=1)
-
 		#run check on database for documents that have date within range:
 			#daystart <= date < nextdaystart
 			#AND that have the requested uid
