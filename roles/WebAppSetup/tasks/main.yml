@@ -18,9 +18,9 @@
   pip:
     name: flask-restful
 
-- name: install Flask-PyMongo
+- name: install pymongo
   pip:
-    name: Flask-PyMongo
+    name: pymongo
 
 #- name: Start Flask App
 #  script: /vagrant/roles/WebAppSetup/files/app.py
