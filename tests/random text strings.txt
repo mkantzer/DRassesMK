@@ -24,4 +24,13 @@ curl -X POST -d '{"uid": "1", "name": "John Doe", "date": "2015-05-12T14:36:00.4
 
 
 TO ACTUALLY POST WITH JSON:
-curl -X POST -H "Content-Type: application/json" -d '{"uid": "1", "name": "John Doe", "date": "2015-05-12T14:36:00.451765", "check": "banana"}' 192.168.33.10:8080/post
+curl -X POST -H "Content-Type: application/json" -d '{"uid": "1", "name": "John Doe", "date": "2015-05-12T14:36:00.451765", "md5checksum": "E8C83E232B64CE94FDD0E4539AD0D44F"}' 192.168.33.10:8080/post
+
+
+TO CHECK GET:
+
+curl 'http://192.168.33.10:8080/get?uid=1&date=2015-05-12T14:36:00.451765'
+
+
+To Check DB:
+curl 'http://192.168.33.10:8080/check

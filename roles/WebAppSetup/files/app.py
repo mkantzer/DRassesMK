@@ -17,15 +17,16 @@ logs = db.logs
 
 #set up request parser
 parser = reqparse.RequestParser()
-parser.add_argument('uid', required=True, help="uid required for this request")
-parser.add_argument('date', required=True, help="uid required for this request")
+
 
 
 class Posting(Resource):
 	def post(self):
 		#grab name and checksum from json
-		parser.add_argument('name', location='json', required=True)
-		parser.add_argument('md5checksum', location='json', required=True)
+		parser.add_argument('uid', location='json', required=True, help="uid required for this request")
+		parser.add_argument('date', location='json', required=True, help="date required for this request")
+		parser.add_argument('name', location='json', required=True, help="name required for this request")
+		parser.add_argument('md5checksum', location='json', required=True, help="md5checksum required for this request")
 		payload = parser.parse_args()
 #		pprint.pprint(payload)
 		# Generate checksum
@@ -50,15 +51,42 @@ class Posting(Resource):
 			return "Error 400, bad checksum"
 
 
-#this may need to be under a different class/resource
-#	def get(self, uid, date):
+class Getting(Resource):
+	def get(self):
+		parser.add_argument('uid', required=True, help="uid required for this request")
+		parser.add_argument('date', required=True, help="date required for this request")
+		args = parser.parse_args()
+		uid = args['uid']
+		#convert datetime to start/end times
+		d = dateparse.parse(args['date'])
+		daystart = datetime.datetime(d.year,d.month,d.day)
+		nextdaystart = daystart + datetime.timedelta(days=1)
+
+		#run check on database for documents that have date within range:
+			#daystart <= date < nextdaystart
+		numberoflogs = logs.count({ "$and": [{"date": {"$gte": daystart}},{"date": {"$lt": nextdaystart}}]})		
+		return numberoflogs
+
+
+#class Checking(Resource):
+#	def get(self):
+#		cursor = logs.find({})
+#		x = 0
+#		for doc in cursor:
+#			pprint.pprint(doc)
+#			x = x + 1
+#		return x
 
 
 # First endpoint, for receiving POSTs
 api.add_resource(Posting, '/post')
 
 # Second endpoint, for GET requests
-#api.add_resource(Getting, '/get')
+api.add_resource(Getting, '/get')
+
+# Third Endpoint, for verifying post writes correctly to database
+#api.add_resource(Checking, '/check')
+
 
 
 
