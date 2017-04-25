@@ -67,14 +67,14 @@ class Getting(Resource):
 		return numberoflogs
 
 
-#class Checking(Resource):
-#	def get(self):
-#		cursor = logs.find({})
-#		x = 0
-#		for doc in cursor:
-#			pprint.pprint(doc)
-#			x = x + 1
-#		return x
+class Checking(Resource):
+	def get(self):
+		cursor = logs.find({})
+		x = 0
+		for doc in cursor:
+			pprint.pprint(doc)
+			x = x + 1
+		return x
 
 
 # First endpoint, for receiving POSTs
@@ -84,7 +84,7 @@ api.add_resource(Posting, '/post')
 api.add_resource(Getting, '/get')
 
 # Third Endpoint, for verifying post writes correctly to database
-#api.add_resource(Checking, '/check')
+api.add_resource(Checking, '/check')
 
 
 

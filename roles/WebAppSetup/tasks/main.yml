@@ -26,5 +26,16 @@
   pip:
     name: python-dateutil
 
-#- name: Start Flask App
-#  shell: python /vagrant/roles/WebAppSetup/files/app.py
+- name: install gunicorn
+  pip:
+    name: gunicorn
+
+- name: copy Upstart Configuration
+  copy:
+    src: webapp.conf
+    dest: /etc/init
+
+- name: start server service
+  service:
+    name: webapp
+    state: started
